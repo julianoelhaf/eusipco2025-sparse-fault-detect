@@ -1,0 +1,58 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "sparse_fault_detect"
+version = "0.0.1"
+description = "This package provides a method to detect fault in power grids using sparse data."
+authors = [{ name = "Julian Oelhaf" }]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+]
+requires-python = "~=3.10"
+dependencies = [
+  "hydra-core",
+  "joblib",
+  "matplotlib",
+  "mlflow",
+  "natsort",
+  "numpy",
+  "omegaconf",
+  "pandas",
+  "pyyaml",
+  "scikit-learn",
+  "seaborn",
+  "tqdm",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "flake8", "black", "isort", "ruff"]
+
+[project.urls]
+Repository = "https://github.com/julianoelhaf/eusipco2025-sparse-fault-detect"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.isort]
+profile = "black"
+line_length = 99
+
+[tool.black]
+line-length = 99
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+)/
+'''
+
+[tool.ruff.lint.isort]
+known_first_party = ["sparse_fault_detect"]
+force_sort_within_sections = true

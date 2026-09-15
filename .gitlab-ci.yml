@@ -1,0 +1,85 @@
+stages:
+  - lint
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PYTHONUNBUFFERED: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  VENV_DIR: "$CI_PROJECT_DIR/.venv"
+
+cache:
+  key:
+    files:
+      - pyproject.toml
+  paths:
+    - .cache/pip
+    - .venv
+
+.before_venv: &before_venv
+  - |
+    if command -v python3 >/dev/null 2>&1; then
+      export PYTHON=python3
+    elif command -v python >/dev/null 2>&1; then
+      export PYTHON=python
+    else
+      echo "ERROR: No python or python3 command found on this runner."
+      exit 1
+    fi
+    echo "Using system PYTHON=${PYTHON}"
+    ${PYTHON} --version
+  - |
+    if [ ! -d "$VENV_DIR" ]; then
+      echo "Creating virtualenv at $VENV_DIR"
+      ${PYTHON} -m venv "$VENV_DIR"
+    else
+      echo "Reusing existing virtualenv at $VENV_DIR"
+    fi
+    source "$VENV_DIR/bin/activate"
+    python --version
+    pip --version
+
+lint:
+  stage: lint
+  before_script:
+    - *before_venv
+    - pip install -e ".[dev]"
+  script:
+    - flake8 sparse_fault_detect tests
+    - isort --check --diff --profile black sparse_fault_detect tests
+    - black --check sparse_fault_detect tests
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+test:
+  stage: test
+  before_script:
+    - *before_venv
+    - pip install -e ".[dev]"
+  script:
+    - |
+      pytest \
+        --junitxml=junit.xml \
+        --cov=sparse_fault_detect \
+        --cov-report=term \
+        --cov-report=xml:coverage.xml \
+        --cov-report=html:htmlcov
+  # pytest-cov `term` TOTAL line is: "TOTAL <stmts> <miss> <cover>%"
+  coverage: '/^TOTAL.+?(\d+%)$/'
+  artifacts:
+    when: always
+    reports:
+      junit: junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    paths:
+      - htmlcov/
+      - coverage.xml
+      - junit.xml
+      - .coverage
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"

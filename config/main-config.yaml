@@ -1,0 +1,14 @@
+defaults:
+  - _self_ # Ensures the current config file is included in the search
+  - cluster: default
+  - dataset: default
+  - data_sparsity: default
+  - model: default
+  - training: default
+  - window_extraction: default
+
+batch_size: 500
+n_samples: 4000 # prelimanry-tests: 400, total: 4991
+full_dataset: False
+overwrite: False
+sample_ids: []

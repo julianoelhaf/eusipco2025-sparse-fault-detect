@@ -1,0 +1,61 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated paper (see preferred-citation)."
+title: "Impact of Data Sparsity on Machine Learning for Fault Detection in Power System Protection"
+type: software
+authors:
+  - family-names: "Oelhaf"
+    given-names: "Julian"
+    email: "julian.oelhaf@fau.de"
+  - family-names: "Kordowich"
+    given-names: "Georg"
+  - family-names: "Kim"
+    given-names: "Changhun"
+  - family-names: "Pérez-Toro"
+    given-names: "Paula Andrea"
+  - family-names: "Maier"
+    given-names: "Andreas"
+  - family-names: "Jäger"
+    given-names: "Johann"
+  - family-names: "Bayer"
+    given-names: "Siming"
+year: 2025
+license: MIT
+repository-code: "https://github.com/julianoelhaf/eusipco2025-sparse-fault-detect"
+preferred-citation:
+  type: conference-paper
+  title: "Impact of Data Sparsity on Machine Learning for Fault Detection in Power System Protection"
+  authors:
+    - family-names: "Oelhaf"
+      given-names: "Julian"
+      email: "julian.oelhaf@fau.de"
+    - family-names: "Kordowich"
+      given-names: "Georg"
+    - family-names: "Kim"
+      given-names: "Changhun"
+    - family-names: "Pérez-Toro"
+      given-names: "Paula Andrea"
+    - family-names: "Maier"
+      given-names: "Andreas"
+    - family-names: "Jäger"
+      given-names: "Johann"
+    - family-names: "Bayer"
+      given-names: "Siming"
+  collection-title: "2025 33rd European Signal Processing Conference (EUSIPCO)"
+  conference:
+    name: "33rd European Signal Processing Conference (EUSIPCO)"
+    city: "Palermo"
+    country: "IT"
+  year: 2025
+  start: 1997
+  end: 2001
+  doi: "10.23919/EUSIPCO63237.2025.11226584"
+  publisher:
+    name: "IEEE"
+  url: "https://ieeexplore.ieee.org/document/11226584"
+  identifiers:
+    - type: doi
+      value: "10.23919/EUSIPCO63237.2025.11226584"
+      description: "Published version (IEEE Xplore)"
+    - type: other
+      value: "arXiv:2505.15560"
+      description: "arXiv preprint"

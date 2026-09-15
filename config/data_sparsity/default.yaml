@@ -1,0 +1,15 @@
+voltage_loss: False # True, False
+current_loss: False # True, False
+# Duration of zeroing the data in seconds. E.g., 0.02 means 20 ms.
+zeroing_duration_s: 0.000 # 0.005, 0.010, 0.015, 0.020, 0.025, 0.030, 0.035, 0.040, 0.045
+
+# Indices of features to mask if using relay_failure
+relay_failure_ids: [0] # [1, 2, 3, 4, 5, 6, 7, 8]
+
+# Downsampling factor for the data
+downsampling_factor: 1 # 1, 2, 5, 10, 25, 50
+
+# Indices of buses to mask if using bus_failure
+bus_failure_id: 0 # 0: no bus failure, 1: bus 1 failure, 2: bus 2 failure, 3: bus failure 3
+
+phase_failure_id: 'None' # None: no channel failure, A: channel A failure, B: channel B failure, C: channel C failure

@@ -1,0 +1,15 @@
+additional: 1
+data_directory: data
+duration: 1
+expected_name: ResultsRepl
+frequency: 50 # Hz
+multiple_of: 6
+new_name: timestamp
+preprocessed_data_directory: data/preprocessed # local path; override for your environment
+raw_data_directory: raw
+regex: ^(Cub|Feld)_\d+\\Bus\d+((Ext_Grid|Load|)_\d|Line_\d_\d_[a-z])_ai_exp_ct_vt(\.\d+)?$
+samples: 4000
+sampling_frequency: 20_000 # Hz
+step: 0.00015625
+timesteps: 6400
+topology: double_line_90kV

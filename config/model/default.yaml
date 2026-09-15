@@ -1,0 +1,2 @@
+model: random_forest_classifier # logistic_regression, decision_tree_classifier,random_forest_classifier,extra_tree_classifier
+model_directory: models
