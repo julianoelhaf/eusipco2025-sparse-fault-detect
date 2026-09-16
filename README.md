@@ -2,6 +2,7 @@
 
 Robust machine learning for fault detection under data constraints in power system protection.
 
+[![CI](https://github.com/julianoelhaf/eusipco2025-sparse-fault-detect/actions/workflows/ci.yml/badge.svg)](https://github.com/julianoelhaf/eusipco2025-sparse-fault-detect/actions/workflows/ci.yml)
 [![Paper: EUSIPCO 2025](https://img.shields.io/badge/paper-EUSIPCO%202025-b31b1b.svg)](https://doi.org/10.23919/EUSIPCO63237.2025.11226584)
 [![DOI](https://img.shields.io/badge/DOI-10.23919%2FEUSIPCO63237.2025.11226584-blue.svg)](https://doi.org/10.23919/EUSIPCO63237.2025.11226584)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -194,14 +195,19 @@ Selected via `training.fault_target`:
 ## Tests
 
 A unit test suite covers the data-sparsity transforms (relay/bus/phase failures,
-downsampling, block zeroing, voltage/current masks) plus an import smoke test. It runs in CI
-(GitLab, see `.gitlab-ci.yml`) and locally:
+downsampling, block zeroing, voltage/current masks) plus an import smoke test. It runs on
+GitHub Actions (`.github/workflows/ci.yml`, see the CI badge above) and locally:
 
 ```bash
 pip install -e ".[dev]"
 pytest          # run the suite
 make lint       # flake8 + isort/black checks
 ```
+
+The CI workflow runs the same three lint checks and the test suite on Python 3.12, plus a
+guard against site-internal paths and hostnames reappearing in the published scripts.
+`.gitlab-ci.yml` is the original internal pipeline the paper's runs were checked with; it is
+kept for reference and is not executed on GitHub.
 
 ---
 

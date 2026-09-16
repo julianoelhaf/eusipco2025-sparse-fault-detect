@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package and dev tooling
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      # Delegated to the Makefile so `make lint` locally and CI cannot drift
+      # apart -- the README tells contributors to run exactly that target.
+      - name: Lint (flake8, isort, black)
+        run: make lint
+
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package (no dataset needed -- the suite is self-contained)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests
+        run: pytest --cov=sparse_fault_detect --cov-report=term -ra
+
+  hygiene:
+    name: No site-internal references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The published scripts had the FAU cluster layout and a personal conda
+      # environment name baked in; this keeps them from coming back via a
+      # future copy-paste from the internal repository.
+      - name: Check for site-internal paths and hostnames
+        run: |
+          set -e
+          if grep -rInE "iwi5|/home/(hpc|woody|vault)|rrze\.uni-erlangen|git5\.cs\.fau\.de|juoe_" \
+              --exclude-dir=.git --exclude-dir=.github .; then
+            echo "::error::found a site-internal path, hostname or account name"
+            exit 1
+          fi
