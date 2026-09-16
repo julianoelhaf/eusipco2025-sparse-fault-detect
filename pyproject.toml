@@ -54,5 +54,5 @@ exclude = '''
 '''
 
 [tool.ruff.lint.isort]
-known_first_party = ["sparse_fault_detect"]
-force_sort_within_sections = true
+known-first-party = ["sparse_fault_detect"]
+force-sort-within-sections = true
