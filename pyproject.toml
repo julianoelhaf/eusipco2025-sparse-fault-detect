@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "sparse_fault_detect"
-version = "0.0.1"
+version = "1.0.0"
 description = "This package provides a method to detect fault in power grids using sparse data."
 authors = [{ name = "Julian Oelhaf" }]
 license = { file = "LICENSE" }

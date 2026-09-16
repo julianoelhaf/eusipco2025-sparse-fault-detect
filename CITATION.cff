@@ -18,8 +18,21 @@ authors:
     given-names: "Johann"
   - family-names: "Bayer"
     given-names: "Siming"
-year: 2025
+version: "1.0.0"
+date-released: "2026-09-16"
 license: MIT
+keywords:
+  - power system protection
+  - fault detection
+  - fault line identification
+  - data sparsity
+  - machine learning
+  - signal processing
+abstract: >-
+  Code for the EUSIPCO 2025 study of how data sparsity affects machine learning
+  for fault detection and fault line identification in power system protection,
+  covering individual relay failures, bus-level communication loss, downsampling,
+  missing voltage or current channels, and intermittent block dropouts.
 repository-code: "https://github.com/julianoelhaf/eusipco2025-sparse-fault-detect"
 preferred-citation:
   type: conference-paper
