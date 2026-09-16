@@ -146,6 +146,11 @@ python sparse_fault_detect/models/run_model.py --multirun \
 Runs are tracked with MLflow; start a tracking server with `mlflow_server.sh` (see
 `config/cluster/default.yaml` for the port).
 
+The two Slurm scripts (`mlflow_server.sh`, `run_model.sh`) are the ones used for the
+paper's runs, with the site-specific parts replaced by placeholders. Before submitting
+them, set `REPO_DIR` and `MLRUNS_DIR` at the top of each to real paths, and check that
+`module load python/3.9-anaconda` matches a module your cluster actually provides.
+
 ---
 
 ## Configuration
